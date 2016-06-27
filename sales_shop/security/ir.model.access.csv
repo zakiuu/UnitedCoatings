@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sales_shop_group_account_invoice, sale.shop.group.account.invoice, model_sale_shop, account.group_account_invoice, 1, 0, 0, 0
+sales_shop_group_sale_manager, sale.shop.group.sale.manager, model_sale_shop, base.group_sale_manager, 1,1,1,1
+sales_shop_group_sale_salesman, sale.shop.group.sale.salesman, model_sale_shop, base.group_sale_salesman, 1,0,0,0
+sales_shop_group_stock_user, sale.shop.group.stock.user, model_sale_shop, stock.group_stock_user, 1,0,0,0

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="sale_shop_form_view" model="ir.ui.view">
+            <field name="name">sale.shop.for.view</field>
+            <field name="model">sale.shop</field>
+            <field name="arch" type="xml">
+                <form string="Shop">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" invisible="1"/>
+                                <field name="name"/>
+                                <field name="warehouse_id"/>
+                            </group>
+                            <group>
+                                <field name="invoice_address_id" domain="[('type', '=', 'invoice'), ('parent_id', '=', company_id)]"/>
+                                <field name="shipping_address_id" domain="[('type', '=', 'delivery'), ('parent_id', '=', company_id)]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_shop_tree_view" model="ir.ui.view">
+            <field name="name">sale.shop.for.view</field>
+            <field name="model">sale.shop</field>
+            <field name="arch" type="xml">
+                <tree string="Shops">
+                    <field name="name"/>
+                    <field name="warehouse_id"/>
+                    <field name="invoice_address_id"/>
+                    <field name="shipping_address_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_shop_tree_action" model="ir.actions.act_window">
+            <field name="name">sale.shop.tree.action</field>
+            <field name="res_model">sale.shop</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="sale_shop_menu" name="Shops" parent="base.menu_base_config" action="sale_shop_tree_action"/>
+
+        <!--add shop_id to the sale order form view-->
+        <record id="sale_shop_sale_order_form_view" model="ir.ui.view">
+            <field name="name">sale.shop.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="shop_id" required="True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--add shop_id to the sale order tree view-->
+        <record id="sale_shop_sale_order_tree_view" model="ir.ui.view">
+            <field name="name">sale.shop.sale.order.tree.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="shop_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--add shop_id to the sale quotation tree view-->
+        <record id="sale_shop_sale_quotation_tree_view" model="ir.ui.view">
+            <field name="name">sale.shop.sale.quotation.tree.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="shop_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--add shop_id to the out invoice form view-->
+        <record id="sale_shop_customer_invoice_form_view" model="ir.ui.view">
+            <field name="name">sale.shop.customer.invoice.form.view</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="before">
+                    <field name="shop_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

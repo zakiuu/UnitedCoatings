@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="united_coating_account_invoices"
+            model="account.invoice"
+            string="United Coating Invoices"
+            report_type="qweb-pdf"
+            name="united_coating_documents.report_unitedcoating_invoice_document"
+            file="united_coating_documents.report_unitedcoating_invoice_document"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+        <report
+            id="united_coating_sale_orders"
+            model="sale.order"
+            string="United Coating Sales"
+            report_type="qweb-pdf"
+            name="united_coating_documents.report_unitedcoating_sale_document"
+            file="united_coating_documents.report_unitedcoating_sale_document"
+        />
+
+        <report
+            id="united_coating_stock_pickings"
+            model="stock.picking"
+            string="United Coating Pickings"
+            report_type="qweb-pdf"
+            name="united_coating_documents.report_united_coating_picking_document"
+            file="united_coating_documents.report_united_coating_picking_document"
+        />
+        <!--attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"-->
+
+    </data>
+</openerp>
